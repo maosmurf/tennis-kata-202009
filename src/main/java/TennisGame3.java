@@ -18,11 +18,7 @@ public class TennisGame3 implements TennisGame {
             return getStateForDeuce().getStateScore();
         if ((player1Points - player2Points) * (player1Points - player2Points) == 1)
             return getStateForAdvantage().getStateScore();
-        return getScoreWin();
-    }
-
-    private String getScoreWin() {
-        return "Win for " + getLeadingPlayerName();
+        return getStateForWin().getStateScore();
     }
 
     private String getLeadingPlayerName() {
@@ -50,6 +46,10 @@ public class TennisGame3 implements TennisGame {
 
     private State getStateForAdvantage() {
         return () -> "Advantage " + getLeadingPlayerName();
+    }
+
+    private State getStateForWin() {
+        return () -> "Win for " + getLeadingPlayerName();
     }
 
     public void wonPoint(String playerName) {
