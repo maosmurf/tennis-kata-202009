@@ -17,7 +17,9 @@ public class TennisGame3 implements TennisGame {
         if (player1Points == player2Points)
             return "Deuce";
         String leadingPlayerName = getLeadingPlayerName();
-        return ((player1Points - player2Points)*(player1Points - player2Points) == 1) ? "Advantage " + leadingPlayerName : "Win for " + leadingPlayerName;
+        if ((player1Points - player2Points) * (player1Points - player2Points) == 1)
+            return "Advantage " + leadingPlayerName;
+        return "Win for " + leadingPlayerName;
     }
 
     private String getLeadingPlayerName() {
