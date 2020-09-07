@@ -42,15 +42,13 @@ public class TennisGame3 implements TennisGame {
     }
 
     private State getStateByPoint() {
-        return new State() {
-            public String getStateScore() {
-                String[] pointNames = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
-                String player1PointName = pointNames[player1Points];
-                if (player1Points == player2Points)
-                    return player1PointName + "-All";
-                String player2PointName = pointNames[player2Points];
-                return player1PointName + "-" + player2PointName;
-            }
+        return () -> {
+            String[] pointNames = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+            String player1PointName = pointNames[player1Points];
+            if (player1Points == player2Points)
+                return player1PointName + "-All";
+            String player2PointName = pointNames[player2Points];
+            return player1PointName + "-" + player2PointName;
         };
     }
 
