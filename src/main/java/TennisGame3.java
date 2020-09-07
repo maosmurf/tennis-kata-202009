@@ -15,7 +15,7 @@ public class TennisGame3 implements TennisGame {
         if (player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6))
             return getStateForEarlyGame().getStateScore();
         if (player1Points == player2Points)
-            return getScoreDeuce();
+            return getStateForDeuce().getStateScore();
         if ((player1Points - player2Points) * (player1Points - player2Points) == 1)
             return getScoreAdvantage();
         return getScoreWin();
@@ -27,10 +27,6 @@ public class TennisGame3 implements TennisGame {
 
     private String getScoreAdvantage() {
         return "Advantage " + getLeadingPlayerName();
-    }
-
-    private String getScoreDeuce() {
-        return "Deuce";
     }
 
     private String getLeadingPlayerName() {
@@ -50,6 +46,10 @@ public class TennisGame3 implements TennisGame {
             String player2PointName = pointNames[player2Points];
             return player1PointName + "-" + player2PointName;
         };
+    }
+
+    private State getStateForDeuce() {
+        return () -> "Deuce";
     }
 
     public void wonPoint(String playerName) {
