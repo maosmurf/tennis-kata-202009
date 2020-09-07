@@ -12,20 +12,24 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
+        return getStateForPoints().getStateScore();
+    }
+
+    private State getStateForPoints() {
         if (player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6))
-            return getStateForEarlyGame().getStateScore();
+            return getStateForEarlyGame();
         if (player1Points == player2Points)
-            return getStateForDeuce().getStateScore();
+            return getStateForDeuce();
         if ((player1Points - player2Points) * (player1Points - player2Points) == 1)
-            return getStateForAdvantage().getStateScore();
-        return getStateForWin().getStateScore();
+            return getStateForAdvantage();
+        return getStateForWin();
     }
 
     private String getLeadingPlayerName() {
         return player1Points > player2Points ? player1Name : player2Name;
     }
 
-    private interface State{
+    private interface State {
         String getStateScore();
     }
 
