@@ -38,10 +38,12 @@ public class TennisGame3 implements TennisGame {
     }
 
     private String getScoreEarlyGame() {
-        String s;
-        String[] p = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
-        s = p[player1Points];
-        return (player1Points == player2Points) ? s + "-All" : s + "-" + p[player2Points];
+        String[] pointNames = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+        String player1PointName = pointNames[player1Points];
+        if (player1Points == player2Points)
+            return player1PointName + "-All";
+        String player2PointName = pointNames[player2Points];
+        return player1PointName + "-" + player2PointName;
     }
 
     public void wonPoint(String playerName) {
