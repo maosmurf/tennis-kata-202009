@@ -13,7 +13,7 @@ public class TennisGame3 implements TennisGame {
 
     public String getScore() {
         if (player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6))
-            return getScoreEarlyGame();
+            return getStateByPoint().getStateScore();
         if (player1Points == player2Points)
             return getScoreDeuce();
         if ((player1Points - player2Points) * (player1Points - player2Points) == 1)
@@ -37,13 +37,21 @@ public class TennisGame3 implements TennisGame {
         return player1Points > player2Points ? player1Name : player2Name;
     }
 
-    private String getScoreEarlyGame() {
-        String[] pointNames = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
-        String player1PointName = pointNames[player1Points];
-        if (player1Points == player2Points)
-            return player1PointName + "-All";
-        String player2PointName = pointNames[player2Points];
-        return player1PointName + "-" + player2PointName;
+    private interface State{
+        String getStateScore();
+    }
+
+    private State getStateByPoint() {
+        return new State() {
+            public String getStateScore() {
+                String[] pointNames = new String[]{"Love", "Fifteen", "Thirty", "Forty"};
+                String player1PointName = pointNames[player1Points];
+                if (player1Points == player2Points)
+                    return player1PointName + "-All";
+                String player2PointName = pointNames[player2Points];
+                return player1PointName + "-" + player2PointName;
+            }
+        };
     }
 
     public void wonPoint(String playerName) {
