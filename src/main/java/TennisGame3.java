@@ -12,13 +12,16 @@ public class TennisGame3 implements TennisGame {
     }
 
     public String getScore() {
-        if (player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6)) {
+        if (player1Points < 4 && player2Points < 4 && !(player1Points + player2Points == 6))
             return getScoreEarlyGame();
-        }
         if (player1Points == player2Points)
             return "Deuce";
-        String s = player1Points > player2Points ? player1Name : player2Name;
-        return ((player1Points - player2Points)*(player1Points - player2Points) == 1) ? "Advantage " + s : "Win for " + s;
+        String leadingPlayerName = getLeadingPlayerName();
+        return ((player1Points - player2Points)*(player1Points - player2Points) == 1) ? "Advantage " + leadingPlayerName : "Win for " + leadingPlayerName;
+    }
+
+    private String getLeadingPlayerName() {
+        return player1Points > player2Points ? player1Name : player2Name;
     }
 
     private String getScoreEarlyGame() {
